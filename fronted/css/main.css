@@ -374,4 +374,237 @@ font-weight: 800;
 .search-wrap {
 display: flex;
 align-items: center;
+background: var(--bg-surface);
+border: 1px solid var(--border-color);
+border-radius: 30px;
+padding: 0 18px;
+max-width: 440px;
+width: 100%;
+}
+
+.search-wrap span {
+color: var(--text-muted);
+margin-right: 10px;
+}
+
+.search-wrap input {
+background: transparent;
+border: none;
+color: #ffffff;
+height: 40px;
+width: 100%;
+outline: none;
+font-size: 0.9rem;
+}
+
+.topbar-actions-group {
+position: relative;
+}
+
+.icon-btn {
+background: var(--bg-surface);
+border: 1px solid var(--border-color);
+color: #ffffff;
+width: 42px;
+height: 42px;
+border-radius: 50%;
+cursor: pointer;
+display: flex;
+justify-content: center;
+align-items: center;
+position: relative;
+}
+
+.count-bubble-marker {
+position: absolute;
+top: -4px; right: -4px;
+background: #ef4444;
+color: #ffffff;
+font-size: 0.65rem;
+font-style: normal;
+font-weight: 700;
+min-width: 16px;
+height: 16px;
+border-radius: 8px;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 0 4px;
+}
+
+/* 🔔 Live Alerts Overlay Dropdown Card Container */
+.floating-popover-card {
+position: absolute;
+top: 55px; right: 0;
+width: 320px;
+background: var(--bg-surface);
+border: 1px solid var(--border-color);
+border-radius: 12px;
+padding: 16px;
+z-index: 1000;
+box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.floating-popover-card h3 {
+font-family: 'Orbitron', sans-serif;
+font-size: 0.85rem;
+margin-bottom: 10px;
+}
+
+.floating-popover-card hr {
+border: 0; height: 1px; background: var(--border-color); margin-bottom: 10px;
+}
+
+.notification-popover-entry {
+padding: 8px 0;
+border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+.notification-popover-entry p { font-size: 0.85rem; color: var(--text-main); margin-bottom: 2px; }
+.notification-popover-entry small { font-size: 0.7rem; color: var(--text-muted); }
+
+/* ==========================================================================
+📺 CINEMATIC THEATER MODAL VIEWER SYSTEM
+========================================================================== */
+
+.modal {
+position: fixed;
+top: 0; left: 0; width: 100vw; height: 100vh;
+background: rgba(0,0,0,0.92);
+display: flex; justify-content: center; align-items: center;
+z-index: 55555;
+transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+opacity: 0;
+pointer-events: none;
+}
+
+.modal-card.cinematic-layout-card {
+background: #09090b;
+border: 1px solid var(--border-color);
+width: 95%;
+max-width: 960px;
+border-radius: 16px;
+padding: 24px;
+position: relative;
+box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+}
+
+.modal-close {
+position: absolute;
+top: -40px; right: 0;
+background: transparent;
+border: none;
+color: #ffffff;
+font-size: 2rem;
+cursor: pointer;
+}
+
+/* Stream Sourcing Control bar mapping options style */
+.media-routing-control-deck {
+display: flex;
+gap: 10px;
+margin-bottom: 16px;
+flex-wrap: wrap;
+}
+
+.router-btn {
+background: var(--bg-card);
+color: var(--text-muted);
+border: 1px solid var(--border-color);
+padding: 8px 16px;
+border-radius: 6px;
+font-weight: 600;
+font-size: 0.85rem;
+cursor: pointer;
+transition: all 0.2s ease;
+}
+
+.router-btn:hover, .router-btn.active {
+color: #ffffff;
+border-color: var(--border-color-hover);
+}
+
+.router-btn.active {
+background: var(--accent-purple);
+border-color: var(--accent-purple);
+box-shadow: 0 0 10px var(--accent-purple-glow);
+}
+
+.router-btn.dl-highlight {
+margin-left: auto;
+background: #22c55e;
+color: #ffffff;
+border-color: #22c55e;
+font-weight: 700;
+}
+
+.router-btn.dl-highlight:hover {
+background: #16a34a;
+}
+
+.screen-canvas-lock-16-9 {
+position: relative;
+padding-bottom: 56.25%; /* Perfect 16:9 Cinema View Aspect Ratio */
+height: 0;
+overflow: hidden;
+border-radius: 8px;
+background: #000000;
+border: 1px solid var(--border-color);
+}
+
+.screen-canvas-lock-16-9 iframe {
+position: absolute;
+top: 0; left: 0;
+width: 100%; height: 100%;
+}
+
+/* ==========================================================================
+📱 ADAPTIVE MOBILE LAYOUT INTERFACES (APK CRITICAL)
+========================================================================== */
+
+@media (max-width: 900px) {
+.app-shell {
+flex-direction: column;
+}
+
+.sidebar {
+width: 100%;
+height: auto;
+border-right: none;
+border-bottom: 1px solid var(--border-color);
+padding: 15px 20px;
+}
+
+.brand { margin-bottom: 15px; }
+
+nav {
+flex-direction: row;
+overflow-x: auto;
+padding-bottom: 5px;
+}
+
+.nav-item {
+padding: 8px 14px;
+white-space: nowrap;
+}
+
+.sidebar-widget-box, .sidebar-bottom {
+display: none; /* Collapses structural side frames nicely into thin mobile sizes */
+}
+
+.topbar {
+padding: 0 20px;
+}
+
+.mobile-brand {
+display: block;
+font-size: 1.1rem;
+}
+
+.mobile-brand span { color: var(--accent-purple); }
+}
+
 
