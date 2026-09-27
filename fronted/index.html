@@ -4,13 +4,53 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Shadow Stream</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/main.css">
+  <!-- Embedded Socket.IO Client Script Resource Layer Package -->
+  <script src="https://jsdelivr.net"></script>
+  
+  <style>
+    /* 🖼️ Custom Background Photo Configuration */
+    body {
+      background-image: linear-gradient(rgba(9, 9, 11, 0.85), rgba(9, 9, 11, 0.95)), url('YOUR_BACKGROUND_IMAGE_URL_HERE');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+  </style>
 </head>
 <body>
   <div class="noise"></div>
+
+  <!-- 🎬 AUTOMATED APP INTRO PLAYER OVERLAY -->
+  <div id="app-intro-overlay" class="modal-overlay-fullscreen">
+    <div class="intro-player-container">
+      <video id="intro-media-core" autoplay playsinline>
+        <!-- REPLACE WITH YOUR CHOSEN DIRECT MP4 INTRO VIDEO LINK -->
+        <source src="https://googleapis.com" type="video/mp4">
+        Your container doesn't support inline video canvas tags.
+      </video>
+      <button class="skip-intro-btn" onclick="terminateIntroPlayback()">Skip Welcome Video ✕</button>
+    </div>
+  </div>
+
+  <!-- 📢 CUSTOM ANNOUNCEMENT TEXT BANNER MODAL OVERLAY -->
+  <div id="announcement-modal" class="modal-overlay" style="display:none;">
+    <div class="modal-box-card text-center">
+      <div class="announcement-badge">🔔 NOTICE UPDATE</div>
+      <h2>Developer Message</h2>
+      <!-- WRITE DOWN YOUR CUSTOM MESSAGES MANUALLY INSIDE PARAGRAPH BLOCKS BELOW -->
+      <p id="custom-announcement-text">
+        Welcome to Shadow Stream APK V2! The streaming engine has been fully synchronized with live components. 
+        VidSrc and VidLink setups are now fully ready for deployment.
+      </p>
+      <button class="action-dismiss-btn" onclick="dismissAnnouncementModal()">Acknowledge & Continue</button>
+    </div>
+  </div>
+
   <div class="app-shell">
     <aside class="sidebar">
       <div class="brand">
@@ -28,10 +68,24 @@
         <button class="nav-item" data-section="social">◎ <span>Social</span></button>
       </nav>
 
+      <!-- Live Watch Party Quick-Panel Controls Attached Directly into Sidebar Structure -->
+      <div class="sidebar-widget-box">
+        <h3>🟣 Watch Party</h3>
+        <div class="party-action-row">
+          <input type="text" id="party-id-input" placeholder="Room Key">
+          <button class="join-room-btn" onclick="initializeRoomConnection(false)">Join</button>
+        </div>
+        <button class="create-room-btn-block" onclick="initializeRoomConnection(true)">✨ New Room</button>
+        <div id="live-party-telemetry-zone" class="party-status-dashboard" style="display:none;">
+          <small>Room: <span id="telemetry-room-id"></span></small>
+          <div id="telemetry-room-users"></div>
+        </div>
+      </div>
+
       <div class="sidebar-bottom">
         <button class="nav-item" data-section="settings">⚙ <span>Settings</span></button>
         <div class="profile-mini">
-          <img src="https://i.pravatar.cc/80?img=12" alt="">
+          <img src="https://pravatar.cc" alt="Profile Image">
           <div>
             <b>Shadow</b>
             <small>Online</small>
@@ -48,17 +102,45 @@
           <span>⌕</span>
           <input id="searchInput" placeholder="Search movies, series, genres..." autocomplete="off">
         </div>
-        <button class="icon-btn" id="notifyBtn">♢<i></i></button>
+        
+        <div class="topbar-actions-group">
+          <!-- Notification Button Intercept Layer Integrated with Live State Bubble Counters -->
+          <button class="icon-btn" id="notifyBtn" onclick="toggleNotificationPane(event)">
+            ♢<i id="notif-count-bubble" class="count-bubble-marker">0</i>
+          </button>
+          
+          <!-- Floating System Dropdown Panel Drawer Container Block -->
+          <div id="notification-pane" class="floating-popover-card" style="display:none;">
+            <h3>System Notifications</h3>
+            <hr>
+            <div id="notification-payload-list"></div>
+          </div>
+        </div>
       </header>
 
       <section id="content"></section>
     </main>
   </div>
 
+  <!-- 📺 THEATER MODAL: INTEGRATED CINEMATIC PLAYBACK OVERLAY CANVAS -->
   <div class="modal hidden" id="detailModal">
-    <div class="modal-card">
-      <button class="modal-close" id="modalClose">×</button>
-      <div id="detail"></div>
+    <div class="modal-card cinematic-layout-card">
+      <button class="modal-close" id="modalClose" onclick="shutdownTheaterPlayback()">&times;</button>
+      
+      <div class="media-routing-control-deck">
+        <button id="provider-toggle-vidsrc" class="router-btn active" onclick="swapMediaRoute('vidsrc')">Source 1: VidSrc</button>
+        <button id="provider-toggle-vidlink" class="router-btn" onclick="swapMediaRoute('vidlink')">Source 2: VidLink Backup</button>
+        <button id="stream-proxy-dl-btn" class="router-btn dl-highlight" onclick="executeLowResourceProxyDownload()">📥 Mirror Download File</button>
+      </div>
+
+      <div class="screen-canvas-lock-16-9">
+        <iframe id="theater-iframe-viewport" src="" frameborder="0" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+      </div>
+
+      <div id="detail">
+        <!-- Rendered metadata text updates fill dynamically below inside app scripts -->
+        <h2 id="theater-playing-title-label" style="margin-top: 15px; font-family: 'Orbitron', sans-serif;">Media Player Engine...</h2>
+      </div>
     </div>
   </div>
 
