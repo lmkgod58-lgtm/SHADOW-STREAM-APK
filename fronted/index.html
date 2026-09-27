@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Shadow Stream</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">S</div>
+        <div>
+          <strong>SHADOW</strong>
+          <span>STREAM</span>
+        </div>
+      </div>
+
+      <nav>
+        <button class="nav-item active" data-section="home">⌂ <span>Home</span></button>
+        <button class="nav-item" data-section="discover">◈ <span>Discover</span></button>
+        <button class="nav-item" data-section="watchlater">◷ <span>Watch Later</span></button>
+        <button class="nav-item" data-section="social">◎ <span>Social</span></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button class="nav-item" data-section="settings">⚙ <span>Settings</span></button>
+        <div class="profile-mini">
+          <img src="https://i.pravatar.cc/80?img=12" alt="">
+          <div>
+            <b>Shadow</b>
+            <small>Online</small>
+          </div>
+          <span class="online-dot"></span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="mobile-brand">SHADOW<span>STREAM</span></div>
+        <div class="search-wrap">
+          <span>⌕</span>
+          <input id="searchInput" placeholder="Search movies, series, genres..." autocomplete="off">
+        </div>
+        <button class="icon-btn" id="notifyBtn">♢<i></i></button>
+      </header>
+
+      <section id="content"></section>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="detailModal">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose">×</button>
+      <div id="detail"></div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
