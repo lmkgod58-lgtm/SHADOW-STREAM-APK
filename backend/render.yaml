@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: shadow-stream-api
+    runtime: node
+    rootDir: backend
+    buildCommand: yarn install
+    startCommand: yarn start
+    envVars:
+      - key: JWT_SECRET
+        sync: false
+      - key: TMDB_API_KEY
+        sync: false
+      - key: FRONTEND_ORIGIN
+        sync: false
